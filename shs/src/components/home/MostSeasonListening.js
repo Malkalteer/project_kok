@@ -1,28 +1,34 @@
-// 12 1 2 winter
-// 345 spring
-import data from "./data.json";
-export default function MostSeasonListening(){
-    let arrSeason = new Array(4).fill(0);
-    data.forEach((el) => {
-        const date =(el.ts);
-        const mounth = date.split();
-        if (mounth==12||mounth>=1&&mounth<=2) {
-            arrSeason[0] += 1;
-        }
-        if (mounth==3||mounth==4||mounth==5) {
-            arrSeason[1] += 1;
-        }
-        if (mounth==6||mounth==7||mounth==8) {
-            arrSeason[2] += 1;
-        }
-        if (mounth==9||mounth==10||mounth==11) {
-            arrSeason[3] += 1;
-        }
-      });
-      console.log(arrSeason);
-      return( 
-        <div>
-          {arrSeason.indexOf(Math.max(...arrSeason))}
-        </div>
-      )
+import data from './data.json'
+export default function MostPlayedSeason() {
+  const seasons = {
+    winter: 0,
+    spring: 0,
+    summer: 0,
+    Autumn : 0,
+  };
+
+
+  // تحديد الفصل الأكثر تشغيلًا بناءً على التاريخ
+  data.forEach((el) => {
+    const month = new Date(el.date).getMonth() + 1;
+    if (month === 12 || month === 1 || month === 2) {
+      seasons["winter"] += 1;
+    }  if (month >= 3 && month <= 5) {
+      seasons["spring"] += 1;
+    }  if (month >= 6 && month <= 8) {
+      seasons["summer"] += 1;
+    }  if (month >= 9 && month <= 11) {
+      seasons["Autumn "] += 1;
+    }
+  });
+
+  const mostPlayedSeason = Object.keys(seasons).reduce((a, b) => (seasons[a] > seasons[b] ? a : b));
+
+  return (
+    <div>
+      {/* عرض اسم الفصل الأكثر تشغيلًا */}
+      <p style={{color:'red'}}>the Most season listening is : </p>
+      <p style={{color:'red'}}>season : {mostPlayedSeason}</p>
+    </div>
+  );
 }

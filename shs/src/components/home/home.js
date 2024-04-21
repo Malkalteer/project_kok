@@ -3,60 +3,73 @@ import data from "../home/data.json";
 import Most_hour_listening from "./MostHourListening";
 import MostSeasonListening from "./MostSeasonListening";
 import TopArtest from "./TopArtest";
+import TopAlbums from "./TopAlbime";
+import { useState } from "react";
 
 let myData = data.length;
 
 function Card(props) {
+  let[ btn,setbtn] =useState(false)
+  // let [btn_txt,setbtn_txt] = useState('show')
+  let ss= btn ? "clear" :"show"
+  const handleClick = () => {
+    btn?setbtn(false):setbtn(true)
+  };
+
+ 
+
   return (
-    <>
+    <div>
       <div className="Card">
         <p>{props.qu}</p>
-        <span>{props.v} </span>
-        <span> {props.m}</span>
+        <p>        <button className="btm" onClick={handleClick }>{ss}</button>
+        </p>
+        {btn&& <span>{props.v} </span>}
+        {btn&&<span> {props.m}</span>}
+        </div>
       </div>
-    </>
   );
 }
 function SmallCard() {
   return (
-    <>
+    <div className="man">
       <div className="SmallCard">
         <p>hii</p>
       </div>
-    </>
+      </div>
   );
 }
-function Search() {
-  return (
-    <>
-      <input className="search" placeholder="Search"></input>
-    </>
-  );
-}
+// function Search() {
+//   return (
+//     <div>
+//       <input className="search" placeholder="Search"></input>
+//       </div>
+//   );
+// }
 function SideBar() {
   return (
-    <>
+    <div>
       <aside>
         <div className="side">
-          <p>All</p>
-          <p>search</p>
-          <p>musics</p>
-          <p>podcasts</p>
-          <p>favorite</p>
+          <a href="#nana"><button className="brd" >All</button></a>
+          <button className="brd">Top</button>
+          <button className="brd">All</button>
+          <button className="brd">All</button>
+          <button className="brd">All</button>
         </div>
       </aside>
-    </>
+      </div>
   );
 }
 function Box() {
   return (
-    <>
+    <div>
       <div className="box">
         <SmallCard />
         <SmallCard />
         <SmallCard />
       </div>
-    </>
+      </div>
   );
 }
 
@@ -64,10 +77,10 @@ function Body() {
   // let nams=dat.map(el=>!arr[el.name]?arr.push(el.name):null)
   // let uniqueArray = [...new Set(dat)];
   return (
-    <>
+    <div>
       <div className="body">
         <div className="sections">
-          <p>Your Musics</p>
+          <p>Your data</p>
           <div className="row">
             {/* {
                             dat.map(
@@ -79,8 +92,8 @@ function Body() {
             <Card qu="How much time spent listening ?" v={ex3} m="secund" />
             <Card qu="Daily avarage time listening?" v={ex4} />
             <Card qu="MostHourListening" v={ex5} />
-            <Card qu="MostseasionListening?" v={ex6} />
-            <Card qu="artest?"  />
+            <Card className="" qu="MostseasionListening?" v={ex6} />
+            <Card qu="artest?"   />
             
             {/* <Most_hour_listening />MostHourListening
             
@@ -88,27 +101,23 @@ function Body() {
           </div>
         </div>
         <div className="rows">
-          <div className="columns">
-            <Search />
-            <Box />
-          </div>
-          <div className="play">
-            <p>qqq</p>
-          </div>
+          
+          
+        
         </div>
       </div>
-    </>
+      </div>
   );
 }
 
 function Home() {
   return (
-    <>
-      <div className="row2">
+    <div>
+      <div className="row2" id="#nana">
         <SideBar />
         <Body />
       </div>
-    </>
+      </div>
   );
 }
 
@@ -140,6 +149,8 @@ let ex4 = Math.trunc(allListingTime / 1000 / numberDayListing.length);
 let ex5= <Most_hour_listening/>
 //general6
 let ex6= <MostSeasonListening/>
+//general7
+let ex7= <TopAlbums/>
 
 let houer = [];
 // data.map(el=>houer.push(el.ts.getHours()))
